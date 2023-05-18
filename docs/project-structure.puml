@@ -1,0 +1,136 @@
+@startuml
+abstract class AbstractRepository {
+    model_cls
+
+    create()
+    get()
+    update()
+    delete()
+    list()
+}
+
+class SQLAlchemyRepository {
+    db_session: Session
+}
+
+AbstractRepository --* BaseModel
+SQLAlchemyRepository --|> AbstractRepository
+InMemoryRepository --|> AbstractRepository
+@enduml
+
+@startuml
+class User
+class Team
+class UserTeams
+class Token
+class Application
+class Package
+class Channel
+class Group
+class ApplicationGroups
+
+abstract class AbstractRepository {
+    model_cls
+
+    create()
+    get()
+    update()
+    delete()
+    list()
+}
+
+abstract class AbstractService {
+    repository: AbstractRepository
+    db_session: Session
+}
+
+AbstractService --* AbstractRepository
+
+class UserService {
+    new_user()
+    get_user()
+    find_users()
+    update_user_info()
+    delete_user()
+
+    new_user_token()
+    get_user_token()
+    find_user_tokens()
+    revoke_user_token()
+}
+
+UserService --|> AbstractService
+UserService --> User
+UserService --> Token
+
+class TeamService {
+    new_team()
+    get_team()
+    find_teams()
+    update_team_info()
+    delete_team()
+
+    join()
+    leave()
+}
+
+TeamService --|> AbstractService
+TeamService --> Team
+TeamService --> User
+TeamService --> UserTeams
+
+
+class ApplicationService {
+    new_application()
+    get_application()
+    find_applications()
+    update_application_info()
+    delete_application()
+
+    new_application_channel()
+    get_application_channel()
+    find_application_channels()
+    update_application_channel_info()
+    delete_application_channel()
+}
+
+ApplicationService --|> AbstractService
+ApplicationService --> Application
+ApplicationService --> Channel
+
+
+class PackageService {
+    application: Application
+
+    find_application_packages()
+    new_application_package()
+    get_application_package()
+    update_application_package()
+    delete_application_package()
+
+    add_application_package_to_channel()
+    remove_application_package_from_channel()
+}
+
+PackageService --|> AbstractService
+PackageService --* Application
+PackageService --> Channel
+PackageService --> Package
+
+class ApplicationGroupsService {
+    new_group()
+    find_groups()
+    get_group()
+    update_group_info()
+    delete_group()
+
+    get_group_applications()
+    add_application_to_group()
+    remove_application_from_group()
+}
+
+ApplicationGroupsService --|> AbstractService
+ApplicationGroupsService --o Application
+ApplicationService --> Group
+ApplicationService --> ApplicationGroups
+@enduml

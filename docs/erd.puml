@@ -1,0 +1,100 @@
+@startuml
+!theme mars
+entity application {
+* id: uuid
+--
+* name: varchar(255)
+description: varchar(255)
+* team_id: FK(team.id)
+* created_at: timestamp in UTC
+* updated_at: timestamp in UTC
+}
+
+entity team {
+* id: uuid
+--
+* name: varchar(255)
+description: varchar(255)
+* created_at: timestamp in UTC
+* updated_at: timestamp in UTC
+}
+
+entity user {
+* id: uuid
+--
+* email: varchar(255)
+* full_name: varchar(255)
+* created_at: timestamp in UTC
+* updated_at: timestamp in UTC
+* last_login: timestamp in UTC
+}
+
+entity user_teams {
+* id: uuid
+--
+* user_id: FK(user.id)
+* team_id: FK(team.id)
+* created_at: timestamp in UTC
+* updated_at: timestamp in UTC
+}
+
+entity channel {
+* id: uuid
+--
+* name: varchar(255)
+* application_id: FK (applicattion.id)
+* package_id: FK(package.id)
+* created_at: timestamp in UTC
+* updated_at: timestamp in UTC
+}
+
+entity package {
+* id: uuid
+--
+* file_name: varchar(255)
+* hash: varchar(?)
+* size: int
+* url: varchar(1000)
+* application_id: FK (application.id)
+* created_at: timestamp in UTC
+* updated_at: timestamp in UTC
+}
+
+entity group {
+* id: uuid
+--
+* name: varchar(255)
+* created_at: timestamp in UTC
+* updated_at: timestamp in UTC
+}
+
+entity application_groups {
+* id: uuid
+--
+* application_id: FK(application.id)
+* group_id: FK(group.id)
+* created_at: timestamp in UTC
+* updated_at: timestamp in UTC
+}
+
+entity token {
+* id: uuid
+--
+* user_id: FK(user.id)
+* token: uuid
+* deleted: Boolean
+* created_at: timestamp in UTC
+* updated_at: timestamp in UTC
+}
+
+application }o--|| team
+user ||--o{ user_teams
+user_teams }o--|| team
+channel }o--|| application
+package }o--|| application
+application ||--o{ application_groups
+group ||--o{ application_groups
+channel |o--o| package
+user ||--o{ token
+
+@enduml
