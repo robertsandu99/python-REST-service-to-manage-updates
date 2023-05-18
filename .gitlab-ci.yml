@@ -1,0 +1,36 @@
+image:
+  name: docker/compose:1.29.2
+
+services:
+  - name: docker:dind
+    alias: dind
+
+stages:
+  - build
+  - test
+
+variables:
+  IMAGE_BASE: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+  IMAGE: $IMAGE_BASE:latest
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+build:
+  stage: build
+  script:
+    #cache build
+    - docker pull $IMAGE
+    - docker-compose build
+    - docker push $IMAGE
+
+test:
+  stage: test
+  script:
+    - docker pull $IMAGE
+    - docker-compose up -d
+    - docker-compose run server poe alembic_upgrade_heads_cicd
+    - docker-compose run server poe container_api_test
+
+
+  allow_failure: false

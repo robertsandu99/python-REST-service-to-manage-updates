@@ -1,0 +1,14 @@
+.coverage
+coverage.xml
+htmlcov
+.mypy_cache
+.pytest_cache
+dist
+__pycache__
+.DS_Store
+.env
+.vscode/
+Storage/
+.Storage/
+.test_storage/
+test_storage/
