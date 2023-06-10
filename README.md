@@ -6,12 +6,6 @@ UpdateService is a simple REST service which allows to manage and packages updat
 - Packages management
 - User management
 
-The service is partially compatible with the [updateservicectl](https://github.com/coreos/updateservicectl) client and supports the following command:
-- `channel` (`create`, `list`, `update`, `delete`)
-- `app` (`create`, `list`, `update`, `delete`)
-- `package` (`create`, `list`, `delete`, `upload`, `download`)
-
-
 ## Development
 
 ### Technology Stack
@@ -54,43 +48,8 @@ The service is partially compatible with the [updateservicectl](https://github.c
 - [Lesson 4](https://www.youtube.com/watch?v=58jGpV2Cg50&t=4881s)
 
 ### Development methodology
-We will be using an Agile ([Agile Manifesto](https://agilemanifesto.org/), [Agile Principles](https://agilemanifesto.org/principles)) framework with elements of [Scrum](https://www.scrum.org/resources/what-is-scrum) and [Kanban](https://www.atlassian.com/agile/kanban).
-
-### Ceremonies
-| Event                     | When           | Participants |
-|---------------------------|----------------|--------------|
-| Daily Scrum (stand-up)    | Daily (12 am)  | Scrum Team   |
-| Sprint Review (Demo)      | Every Fri      | Scrum Team   |
-| Sprint Planning +grooming | Every Thu      | Scrum Team   |
-| Sprint Retrospective      | Every Fri      | Scrum Team   |
-
-### Team, responsibility and roles
-| Name                 | Email                 | Responsibility| Scrum Role     |
-|----------------------|-----------------------|---------------|----------------|
-| Yuriy Senko          | ysenko@lohika.com     | Tech Lead     | PO             |
-| Nazar Dobosh         | ndobosh@lohika.com    | PM            | SM, Stakeholder|
-| Andrii Pinaiev       | apinaiev@lohika.com   | Team Lead     | Dev            |
-| Ihor Pohoidash       | ipohoidash@lohika.com | Team Lead     | Dev            |
-| Petro Naidiuk        | pnaidiuk@lohika.com   | Team Lead     | Dev            |
-
-
-### How to start working on a ticket
-We are using the [Gitlab flow](https://docs.gitlab.com/ee/topics/gitlab_flow.html)
-
-All new features (tickets) must be developed in a separate branch. Use the following branch name template: `[feature|bugfix]<ticket-id>-short-description-of-changes` e.g.: in case if I'm working on issue 34, and I'm going to add `/users` endpoint in scope of this ticket, I'm going to create a branch called `feature-34-users-endpoint`.
-After you done all needed changes, push branch to GitLab and create a merge request (MR). All MRs must be pointed to the `main` branch. Assign all your teammates as reviewers. Once you get an at least one approve from your peers AND approve from any TL (Tech OR Team Lead), proceed with merge.
-
-In order to start development you need:
-1. Pick a ticket and assign it to yourself.
-2. Make sure that you understand the task and acceptance criteria (never start a task you do not understand, ask TL and PO to clarify it during grooming).
-3. Create a feature branch in the format `[feature|bugfix]-<ticket-id>-<short-feature-description>` e.g.: `git checkout -b feature-42-the-ultimate-answer-to-everything`
-4. Implement functionality and tests.
-5. Run linter and formatter locally and fix all warnings and errors.
-6. Run tests and make sure they are passing locally.
-7. Make sure commit messages are descriptive. Commit summary should contain the ticket number and a short summary of the changes you have made. The summary ideally should not exceed 50 characters. The very first word should always reflect the type of changes you have made: “Add …”, “Remove …“, “Update …”, “Create …”. You should “virtually” read your commit summary as follows: (This commit will) "Add base layout”. The format is `<ticket-id> <short summary>.` E.g. `14 Create user endpoint`
-8. Push your branch to gitlab e.g. `git push origin -u feature-42-the-ultimate-answer-to-everything`
-9. Go to GitLab and create a merge request. Assign, and your teammates as reviewer.
-10. Once you get approve from TL and at least one of your peers, feel free to merge the MR, squash commits and delete branch from the GitLab.
+- Agile
+- Scrum
 
 ### Local dev env
 
@@ -118,18 +77,18 @@ Then open http://127.0.0.1:8080/docs in your browser
 * poe test --cov-report-type html
 
 #### Run functional tests locally
-TBD (SHOULD be written and available here after completing Milestone 01)
+poe local_api_test
 
 #### Create DB migration
-TBD (SHOULD be written and updated here after completing Milestone 02 (see issue #11))
+
 
 #### Upgrade DB schema
-TBD (SHOULD be written and updated here after completing Milestone 02 (see issue #11))
+poe alembic upgrade_heads_test
+poe alembic upgrade_heads_dev
 
 #### Downgrade DB schema
-TBD (SHOULD be written and updated here after completing Milestone 02 (see issue #11))
+poe alembic downgrade_base_test
+poe alembic downgrade_base_dev
 
 Name : SANDU Robert-Andrei
-Email: robert.sandu@capgemini.com
-
 *Personal email : san_roby@yahoo.com
