@@ -83,12 +83,12 @@ poe local_api_test
 
 
 #### Upgrade DB schema
-poe alembic upgrade_heads_test
-poe alembic upgrade_heads_dev
+- poe alembic upgrade_heads_test
+- poe alembic upgrade_heads_dev
 
 #### Downgrade DB schema
-poe alembic downgrade_base_test
-poe alembic downgrade_base_dev
+- poe alembic downgrade_base_test
+- poe alembic downgrade_base_dev
 
 Name : SANDU Robert-Andrei
 *Personal email : san_roby@yahoo.com
