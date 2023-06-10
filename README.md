@@ -90,5 +90,5 @@ poe local_api_test
 - poe alembic downgrade_base_test
 - poe alembic downgrade_base_dev
 
-Name : SANDU Robert-Andrei
-*Personal email : san_roby@yahoo.com
+- Name : SANDU Robert-Andrei
+- Personal email : san_roby@yahoo.com
