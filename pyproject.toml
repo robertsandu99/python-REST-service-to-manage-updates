@@ -2,7 +2,7 @@
 name = "updateservice"
 version = "0.1.0"
 description = "Simple Python REST service to manage packages updates"
-authors = ["Yuriy Senko <ysenko@lohika.com>"]
+authors = ["Robert Sandu <san_roby@yahoo.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
