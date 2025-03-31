@@ -1,6 +1,6 @@
 # Update Service
 
-UpdateService is a simple REST service which allows to manage and packages updates. It provides a set of APIs for:
+UpdateService is a simple REST service which allows to manage users and packages updates. It provides a set of APIs for:
 - Update channels management
 - Applications management
 - Packages management
